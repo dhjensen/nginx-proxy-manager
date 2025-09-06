@@ -1,0 +1,23 @@
+name: nginx-proxy-manager
+
+services:
+  npm:
+    image: jc21/nginx-proxy-manager:${NGINX_PROXY_MANAGER_VERSION}
+    volumes:
+      - webdata:/data
+      - letsencrypt:/etc/letsencrypt
+    ports:
+      - "${NGINX_IP_ADDRESS}:80:80" # Public HTTP Port
+      - "${NGINX_IP_ADDRESS}:81:81" # Admin Web Port
+      - "${NGINX_IP_ADDRESS}:443:443" # Public HTTPS Port
+    networks:
+      - frontend
+    restart: unless-stopped
+
+networks:
+  frontend:
+    driver: bridge
+
+volumes:
+  webdata:
+  letsencrypt:
