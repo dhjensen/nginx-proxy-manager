@@ -3,7 +3,7 @@ name: nginx-proxy-manager
 services:
   npm:
     image: jc21/nginx-proxy-manager:${NGINX_PROXY_MANAGER_VERSION}
-    container_name: npn
+    container_name: npm
     volumes:
       - webdata:/data
       - letsencrypt:/etc/letsencrypt
