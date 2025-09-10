@@ -3,9 +3,11 @@ name: nginx-proxy-manager
 services:
   npm:
     image: jc21/nginx-proxy-manager:${NGINX_PROXY_MANAGER_VERSION}
+    container_name: npn
     volumes:
       - webdata:/data
       - letsencrypt:/etc/letsencrypt
+      - /etc/timezone:/etc/timezone:ro
     ports:
       - "${NGINX_IP_ADDRESS}:80:80" # Public HTTP Port
       - "${NGINX_IP_ADDRESS}:81:81" # Admin Web Port
@@ -13,6 +15,8 @@ services:
     networks:
       - frontend
     restart: unless-stopped
+    labels:
+      - wud.tag.include=^\d+\.\d+\.\d+$$
 
 networks:
   frontend:
