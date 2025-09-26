@@ -17,6 +17,7 @@ services:
     restart: unless-stopped
     labels:
       - wud.tag.include=^\d+\.\d+\.\d+$$
+      - traefik.enable=false
 
 networks:
   frontend:
